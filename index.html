@@ -99,7 +99,7 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    .header { text-align: center; margin-bottom: 2.5rem; }
+    .header { text-align: center; margin-bottom: 2rem; }
 
     .moon-icon {
       font-size: 4.5rem;
@@ -197,6 +197,100 @@
     .req-title { font-weight: 700; font-size: 1rem; color: #e2d6ff; margin-bottom: 0.3rem; }
     .req-desc { font-size: 0.85rem; color: #a89ec0; line-height: 1.5; }
 
+    /* ===== PROGRESSO ===== */
+    .progress-wrap {
+      margin: 0 auto 2.5rem;
+      max-width: 750px;
+    }
+
+    .progress-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.6rem;
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #b8a9e0;
+      font-weight: 600;
+    }
+
+    .progress-info .pct { color: #c9b0ff; font-weight: 800; }
+
+    .progress-bar {
+      width: 100%;
+      height: 12px;
+      background: rgba(20, 12, 40, 0.7);
+      border-radius: 50px;
+      border: 1px solid rgba(150, 110, 255, 0.25);
+      overflow: hidden;
+      box-shadow: 0 0 20px rgba(120, 70, 240, 0.2) inset;
+      position: relative;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 14.28%;
+      background: linear-gradient(90deg, #6a3ec7, #b07aff);
+      border-radius: 50px;
+      transition: width 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
+      box-shadow: 0 0 20px rgba(160, 110, 255, 0.7);
+    }
+
+    .step-dots {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 0.7rem;
+      gap: 0.3rem;
+    }
+
+    .step-dot {
+      flex: 1;
+      text-align: center;
+      font-size: 0.7rem;
+      color: #6a5e8a;
+      letter-spacing: 1px;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+
+    .step-dot.active { color: #c9b0ff; }
+    .step-dot.done { color: #9f7aff; }
+
+    /* ===== ETAPAS ===== */
+    .step {
+      display: none;
+      animation: stepIn 0.45s cubic-bezier(0.2, 0.9, 0.3, 1);
+    }
+
+    .step.active { display: block; }
+
+    @keyframes stepIn {
+      from { opacity: 0; transform: translateX(20px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    .step-title {
+      text-align: center;
+      font-size: 1.4rem;
+      font-weight: 800;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+      background: linear-gradient(135deg, #ffffff, #c9b0ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .step-sub {
+      text-align: center;
+      font-size: 0.85rem;
+      color: #a89ec0;
+      margin-bottom: 2rem;
+      letter-spacing: 1px;
+    }
+
     .form-section {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -205,18 +299,26 @@
     }
 
     .input-group { display: flex; flex-direction: column; gap: 0.5rem; }
+    .input-group.full { grid-column: span 2; }
 
     .input-group label {
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       text-transform: uppercase;
-      letter-spacing: 2px;
+      letter-spacing: 1.5px;
       font-weight: 600;
       color: #b8a9e0;
       margin-left: 0.8rem;
     }
 
-    .input-group input,
-    .input-group select {
+    .input-group label .req-star {
+      color: #ff5a9a;
+      margin-left: 0.2rem;
+    }
+
+    .input-group input[type="text"],
+    .input-group input[type="number"],
+    .input-group select,
+    .input-group textarea {
       background: rgba(12, 8, 25, 0.7);
       border: 1px solid rgba(140, 100, 220, 0.4);
       border-radius: 50px;
@@ -230,10 +332,19 @@
       width: 100%;
     }
 
-    .input-group input::placeholder { color: #6a5e8a; font-weight: 300; }
+    .input-group textarea {
+      border-radius: 1.5rem;
+      resize: vertical;
+      min-height: 110px;
+      line-height: 1.6;
+    }
+
+    .input-group input::placeholder,
+    .input-group textarea::placeholder { color: #6a5e8a; font-weight: 300; }
 
     .input-group input:focus,
-    .input-group select:focus {
+    .input-group select:focus,
+    .input-group textarea:focus {
       border-color: #a97aff;
       box-shadow: 0 0 0 4px rgba(140, 80, 255, 0.2), 0 0 20px rgba(120, 70, 240, 0.3);
       background: rgba(25, 18, 45, 0.9);
@@ -250,31 +361,141 @@
 
     .input-group select option { background: #1a1228; color: #fff; }
 
-    .submit-btn {
-      grid-column: span 2;
-      background: linear-gradient(135deg, #6a3ec7 0%, #9f6aff 50%, #5e3bb0 100%);
+    /* ===== CHECKBOXES ===== */
+    .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.9rem;
+      background: rgba(25, 18, 45, 0.5);
+      border: 1px solid rgba(150, 110, 255, 0.25);
+      border-radius: 1.3rem;
+      padding: 1.1rem 1.3rem;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      margin-bottom: 0.9rem;
+    }
+
+    .check-item:hover {
+      border-color: rgba(180, 140, 255, 0.6);
+      background: rgba(35, 25, 60, 0.7);
+    }
+
+    .check-item input[type="checkbox"] {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 22px; height: 22px;
+      min-width: 22px;
+      border: 2px solid #9f7aff;
+      border-radius: 6px;
+      cursor: pointer;
+      position: relative;
+      transition: all 0.25s ease;
+      margin-top: 0.1rem;
+      background: rgba(20, 12, 40, 0.6);
+    }
+
+    .check-item input[type="checkbox"]:checked {
+      background: linear-gradient(135deg, #6a3ec7, #b07aff);
+      box-shadow: 0 0 15px rgba(160, 110, 255, 0.7);
+    }
+
+    .check-item input[type="checkbox"]:checked::after {
+      content: '✓';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      color: #fff;
+      font-weight: 900;
+      font-size: 0.9rem;
+    }
+
+    .check-text {
+      font-size: 0.92rem;
+      color: #ddd6f0;
+      line-height: 1.5;
+    }
+
+    /* ===== ÚLTIMA CHANCE ===== */
+    .final-chance {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .final-chance .flame {
+      font-size: 3rem;
+      display: inline-block;
+      filter: drop-shadow(0 0 20px rgba(255, 100, 80, 0.9));
+      animation: flamePulse 1.5s ease-in-out infinite;
+    }
+
+    @keyframes flamePulse {
+      0%, 100% { transform: scale(1); filter: drop-shadow(0 0 20px rgba(255, 100, 80, 0.9)); }
+      50% { transform: scale(1.1); filter: drop-shadow(0 0 35px rgba(255, 140, 100, 1)); }
+    }
+
+    .final-chance .final-title {
+      font-size: 1.8rem;
+      font-weight: 900;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      background: linear-gradient(135deg, #ffb347, #ff5a9a, #b07aff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-top: 0.3rem;
+      filter: drop-shadow(0 0 20px rgba(255, 100, 150, 0.5));
+    }
+
+    /* ===== NAVEGAÇÃO ===== */
+    .nav-buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .nav-buttons.single { grid-template-columns: 1fr; }
+
+    .nav-btn {
       border: none;
       border-radius: 60px;
-      padding: 1.2rem 2rem;
-      font-size: 1.1rem;
+      padding: 1.1rem 1.5rem;
+      font-size: 1rem;
       font-weight: 800;
       letter-spacing: 2px;
       text-transform: uppercase;
       color: #fff;
       cursor: pointer;
       transition: all 0.3s ease;
-      box-shadow: 0 10px 30px rgba(100, 50, 200, 0.5), 0 0 0 1px rgba(200, 160, 255, 0.3) inset;
-      margin-top: 0.5rem;
-      position: relative;
-      overflow: hidden;
+      font-family: 'Inter', sans-serif;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 0.8rem;
-      font-family: 'Inter', sans-serif;
+      gap: 0.6rem;
     }
 
-    .submit-btn::before {
+    .nav-btn.back {
+      background: rgba(20, 12, 40, 0.7);
+      border: 1px solid rgba(150, 110, 255, 0.4);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    }
+
+    .nav-btn.back:hover {
+      background: rgba(35, 25, 60, 0.9);
+      border-color: #a97aff;
+      box-shadow: 0 0 20px rgba(140, 80, 255, 0.4);
+    }
+
+    .nav-btn.next,
+    .nav-btn.submit {
+      background: linear-gradient(135deg, #6a3ec7 0%, #9f6aff 50%, #5e3bb0 100%);
+      box-shadow: 0 10px 30px rgba(100, 50, 200, 0.5), 0 0 0 1px rgba(200, 160, 255, 0.3) inset;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .nav-btn.next::before,
+    .nav-btn.submit::before {
       content: '';
       position: absolute;
       top: 0; left: -100%;
@@ -283,16 +504,19 @@
       transition: left 0.6s ease;
     }
 
-    .submit-btn:hover::before { left: 100%; }
+    .nav-btn.next:hover::before,
+    .nav-btn.submit:hover::before { left: 100%; }
 
-    .submit-btn:hover {
+    .nav-btn.next:hover,
+    .nav-btn.submit:hover {
       transform: scale(1.02);
       box-shadow: 0 15px 40px rgba(120, 70, 240, 0.8), 0 0 30px rgba(160, 110, 255, 0.5);
-      background: linear-gradient(135deg, #7a4ed7 0%, #b07aff 50%, #6e4ac0 100%);
     }
 
-    .submit-btn:active { transform: scale(0.98); }
-    .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+    .nav-btn:active { transform: scale(0.98); }
+    .nav-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+    .nav-btn.hidden { display: none; }
 
     .footer-note {
       text-align: center;
@@ -338,22 +562,27 @@
       align-items: center;
       gap: 0.8rem;
       font-size: 0.95rem;
+      max-width: 90%;
     }
 
     .toast.show { transform: translateX(-50%) translateY(0); }
-
     .toast.error { border-color: #ff5a5a; box-shadow: 0 20px 40px rgba(0,0,0,0.7), 0 0 30px rgba(255, 80, 80, 0.5); }
 
+    /* RESPONSIVO */
     @media (max-width: 768px) {
       .glass-card { padding: 2rem 1.5rem; border-radius: 2rem; }
       .form-section { grid-template-columns: 1fr; gap: 1.2rem; }
-      .submit-btn { grid-column: span 1; }
+      .input-group.full { grid-column: span 1; }
       .description { padding: 1rem 1.2rem; font-size: 0.95rem; border-radius: 30px; }
       .subhead { font-size: 0.9rem; letter-spacing: 2px; }
       .requirements-grid { grid-template-columns: 1fr 1fr; gap: 0.8rem; }
       .req-item { padding: 1.2rem 0.8rem; }
       .req-title { font-size: 0.9rem; }
       .req-desc { font-size: 0.75rem; }
+      .step-dot { font-size: 0.55rem; }
+      .nav-buttons { grid-template-columns: 1fr; }
+      .step-title { font-size: 1.1rem; letter-spacing: 2px; }
+      .final-chance .final-title { font-size: 1.3rem; letter-spacing: 2px; }
     }
 
     @media (max-width: 480px) {
@@ -362,9 +591,9 @@
       .moon-icon { font-size: 3.5rem; }
       .team-name { letter-spacing: 2px; }
       .requirements-grid { grid-template-columns: 1fr; }
-      .input-group input,
-      .input-group select { padding: 0.9rem 1.2rem; font-size: 0.9rem; }
-      .submit-btn { font-size: 0.95rem; padding: 1rem 1.5rem; }
+      .input-group input, .input-group select, .input-group textarea { padding: 0.9rem 1.2rem; font-size: 0.9rem; }
+      .nav-btn { font-size: 0.9rem; padding: 1rem 1.2rem; }
+      .progress-info { font-size: 0.7rem; }
     }
 
     ::-webkit-scrollbar { width: 8px; }
@@ -393,59 +622,259 @@
 
       <div class="description">
         <strong>⚠️ Operações noturnas • Invasões de baile • Roblox</strong><br>
-        Buscamos agentes disciplinados, estratégicos e leais. Se você não tem medo da madrugada e vive pela adrenalina, junte-se à elite.
+        Preencha o formulário com atenção. Sua candidatura será analisada pela liderança.
       </div>
 
-      <div class="requirements-grid">
-        <div class="req-item">
-          <span class="req-icon">🎯</span>
-          <div class="req-title">Nível 30+</div>
-          <div class="req-desc">Experiência em combate e movimentação</div>
+      <!-- BARRA DE PROGRESSO -->
+      <div class="progress-wrap">
+        <div class="progress-info">
+          <span id="stepLabel">ETAPA 1 DE 7 — INFORMAÇÕES</span>
+          <span class="pct" id="pctLabel">14%</span>
         </div>
-        <div class="req-item">
-          <span class="req-icon">🎧</span>
-          <div class="req-title">Discord Ativo</div>
-          <div class="req-desc">Comunicação obrigatória em operações</div>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
         </div>
-        <div class="req-item">
-          <span class="req-icon">🕒</span>
-          <div class="req-title">Disponibilidade</div>
-          <div class="req-desc">Mínimo 3 dias por semana à noite</div>
-        </div>
-        <div class="req-item">
-          <span class="req-icon">🧠</span>
-          <div class="req-title">Maturidade</div>
-          <div class="req-desc">Sem toxicidade, foco no trabalho em equipe</div>
+        <div class="step-dots">
+          <div class="step-dot active" data-step="1">01 INFORMAÇÕES</div>
+          <div class="step-dot" data-step="2">02 EXPERIÊNCIA</div>
+          <div class="step-dot" data-step="3">03 SITUAÇÕES</div>
+          <div class="step-dot" data-step="4">04 ATIVIDADE</div>
+          <div class="step-dot" data-step="5">05 PERFIL</div>
+          <div class="step-dot" data-step="6">06 COMPROMISSO</div>
+          <div class="step-dot" data-step="7">07 FINAL</div>
         </div>
       </div>
 
-      <form id="recruitForm" class="form-section">
-        <div class="input-group">
-          <label>Nome no Roblox</label>
-          <input type="text" id="robloxUser" placeholder="Ex: Insomnia_King" required>
+      <form id="recruitForm" novalidate>
+
+        <!-- ============ ETAPA 1 ============ -->
+        <div class="step active" data-step="1">
+          <div class="step-title">🌙 Informações Básicas</div>
+          <div class="step-sub">Vamos começar com o essencial sobre você</div>
+
+          <div class="form-section">
+            <div class="input-group">
+              <label>01. Nome/Nick no Roblox <span class="req-star">*</span></label>
+              <input type="text" name="q01_roblox_nick" placeholder="Ex: Insomnia_King" required>
+            </div>
+            <div class="input-group">
+              <label>02. ID do Roblox <span class="req-star">*</span></label>
+              <input type="text" name="q02_roblox_id" placeholder="Ex: 1234567890" required>
+            </div>
+            <div class="input-group">
+              <label>03. Usuário do Discord <span class="req-star">*</span></label>
+              <input type="text" name="q03_discord_user" placeholder="Ex: insonia#0000" required>
+            </div>
+            <div class="input-group">
+              <label>04. Idade <span class="req-star">*</span></label>
+              <input type="number" name="q04_idade" placeholder="Ex: 17" min="1" max="99" required>
+            </div>
+            <div class="input-group full">
+              <label>05. Há quanto tempo você participa de bailes no Roblox? <span class="req-star">*</span></label>
+              <input type="text" name="q05_tempo_bailes" placeholder="Ex: 1 ano e meio" required>
+            </div>
+          </div>
         </div>
-        <div class="input-group">
-          <label>ID ou Tag do Discord</label>
-          <input type="text" id="discordTag" placeholder="Ex: insonia#0000" required>
+
+        <!-- ============ ETAPA 2 ============ -->
+        <div class="step" data-step="2">
+          <div class="step-title">⚔️ Experiência</div>
+          <div class="step-sub">Conte-nos sobre sua trajetória em operações</div>
+
+          <div class="form-section">
+            <div class="input-group full">
+              <label>06. Você já participou de alguma equipe de invasão? <span class="req-star">*</span></label>
+              <select name="q06_equipe_invasao" id="q06" required>
+                <option value="" disabled selected>Selecione uma opção</option>
+                <option value="Sim">Sim</option>
+                <option value="Não">Não</option>
+              </select>
+            </div>
+            <div class="input-group full hidden" id="q06_extra_wrap" style="display:none;">
+              <label>06.1. Qual equipe? <span class="req-star">*</span></label>
+              <input type="text" name="q06_qual_equipe" id="q06_extra" placeholder="Nome da equipe anterior">
+            </div>
+            <div class="input-group full">
+              <label>07. Você já participou de invasões anteriormente? <span class="req-star">*</span></label>
+              <textarea name="q07_invasoes_anteriores" placeholder="Descreva suas experiências em invasões..." required></textarea>
+            </div>
+            <div class="input-group full">
+              <label>08. Você sabe seguir ordens de um líder durante uma operação? <span class="req-star">*</span></label>
+              <select name="q08_seguir_ordens" required>
+                <option value="" disabled selected>Selecione uma opção</option>
+                <option value="Sim">Sim</option>
+                <option value="Não">Não</option>
+                <option value="Tenho pouca experiência">Tenho pouca experiência</option>
+              </select>
+            </div>
+            <div class="input-group full">
+              <label>09. Como você costuma agir quando uma invasão não sai como planejado? <span class="req-star">*</span></label>
+              <textarea name="q09_invasao_errada" placeholder="Explique como você reage a imprevistos..." required></textarea>
+            </div>
+            <div class="input-group full">
+              <label>10. Você consegue trabalhar em equipe sem agir por conta própria? <span class="req-star">*</span></label>
+              <select name="q10_trabalho_equipe" required>
+                <option value="" disabled selected>Selecione uma opção</option>
+                <option value="Sim">Sim</option>
+                <option value="Não">Não</option>
+                <option value="Depende da situação">Depende da situação</option>
+              </select>
+            </div>
+          </div>
         </div>
-        <div class="input-group">
-          <label>Nível no Jogo</label>
-          <input type="number" id="level" placeholder="Ex: 45" min="1" max="999" required>
+
+        <!-- ============ ETAPA 3 ============ -->
+        <div class="step" data-step="3">
+          <div class="step-title">🎯 Situações</div>
+          <div class="step-sub">Como você reagiria em cenários reais de operação</div>
+
+          <div class="form-section">
+            <div class="input-group full">
+              <label>11. Se o líder mandar recuar durante uma operação, o que você faria? <span class="req-star">*</span></label>
+              <textarea name="q11_recuar" placeholder="Descreva sua reação..." required></textarea>
+            </div>
+            <div class="input-group full">
+              <label>12. Se um integrante começar uma discussão durante uma operação, como você agiria? <span class="req-star">*</span></label>
+              <textarea name="q12_discussao" placeholder="Como você lidaria com o conflito..." required></textarea>
+            </div>
+            <div class="input-group full">
+              <label>13. Se perceber que a equipe está desorganizada, qual seria sua atitude? <span class="req-star">*</span></label>
+              <textarea name="q13_desorganizacao" placeholder="O que você faria para ajudar..." required></textarea>
+            </div>
+            <div class="input-group full">
+              <label>14. Se receber uma ordem que não entendeu, o que faria? <span class="req-star">*</span></label>
+              <textarea name="q14_ordem_confusa" placeholder="Como você esclareceria a ordem..." required></textarea>
+            </div>
+            <div class="input-group full">
+              <label>15. O que você faria para evitar confusão desnecessária durante uma operação? <span class="req-star">*</span></label>
+              <textarea name="q15_evitar_confusao" placeholder="Suas estratégias para manter a organização..." required></textarea>
+            </div>
+          </div>
         </div>
-        <div class="input-group">
-          <label>Função Desejada</label>
-          <select id="role" required>
-            <option value="" disabled selected>Selecione uma função</option>
-            <option value="Invasor">Invasor de Baile</option>
-            <option value="Atirador">Atirador de Elite</option>
-            <option value="Suporte">Suporte Tático</option>
-            <option value="Líder">Líder de Esquadrão</option>
-            <option value="Espião">Espião / Reconhecimento</option>
-          </select>
+
+        <!-- ============ ETAPA 4 ============ -->
+        <div class="step" data-step="4">
+          <div class="step-title">🕐 Atividade</div>
+          <div class="step-sub">Sua disponibilidade para as operações</div>
+
+          <div class="form-section">
+            <div class="input-group full">
+              <label>16. Quantas horas por dia você costuma ficar disponível? <span class="req-star">*</span></label>
+              <input type="text" name="q16_horas_dia" placeholder="Ex: 4 a 6 horas" required>
+            </div>
+            <div class="input-group full">
+              <label>17. Quais horários você normalmente consegue participar? <span class="req-star">*</span></label>
+              <input type="text" name="q17_horarios" placeholder="Ex: Das 20h às 23h" required>
+            </div>
+            <div class="input-group full">
+              <label>18. Você consegue participar de reuniões e treinamentos da equipe? <span class="req-star">*</span></label>
+              <select name="q18_reunioes" required>
+                <option value="" disabled selected>Selecione uma opção</option>
+                <option value="Sim">Sim</option>
+                <option value="Não">Não</option>
+                <option value="Às vezes">Às vezes</option>
+              </select>
+            </div>
+            <div class="input-group full">
+              <label>19. Você possui microfone para comunicação em call? <span class="req-star">*</span></label>
+              <select name="q19_microfone" required>
+                <option value="" disabled selected>Selecione uma opção</option>
+                <option value="Sim">Sim</option>
+                <option value="Não">Não</option>
+              </select>
+            </div>
+            <div class="input-group full">
+              <label>20. Você consegue permanecer ativo no Discord durante uma operação? <span class="req-star">*</span></label>
+              <select name="q20_discord_ativo" required>
+                <option value="" disabled selected>Selecione uma opção</option>
+                <option value="Sim">Sim</option>
+                <option value="Não">Não</option>
+              </select>
+            </div>
+          </div>
         </div>
-        <button type="submit" class="submit-btn" id="submitBtn">
-          🌙 ENVIAR CANDIDATURA
-        </button>
+
+        <!-- ============ ETAPA 5 ============ -->
+        <div class="step" data-step="5">
+          <div class="step-title">🧠 Perfil</div>
+          <div class="step-sub">Queremos conhecer você além das operações</div>
+
+          <div class="form-section">
+            <div class="input-group full">
+              <label>21. Por que você quer entrar para a equipe? <span class="req-star">*</span></label>
+              <textarea name="q21_porque_entrar" placeholder="Conte-nos sua motivação..." required></textarea>
+            </div>
+            <div class="input-group full">
+              <label>22. O que você acha que pode acrescentar à equipe? <span class="req-star">*</span></label>
+              <textarea name="q22_acrescentar" placeholder="Suas habilidades e diferenciais..." required></textarea>
+            </div>
+            <div class="input-group full">
+              <label>23. Quais são seus pontos fortes trabalhando em grupo? <span class="req-star">*</span></label>
+              <textarea name="q23_pontos_fortes" placeholder="Descreva suas qualidades em equipe..." required></textarea>
+            </div>
+            <div class="input-group full">
+              <label>24. Como você lida com críticas de superiores? <span class="req-star">*</span></label>
+              <textarea name="q24_criticas" placeholder="Como você reage a feedbacks..." required></textarea>
+            </div>
+            <div class="input-group full">
+              <label>25. Por que deveríamos escolher você? <span class="req-star">*</span></label>
+              <textarea name="q25_porque_escolher" placeholder="Sua resposta final de convencimento..." required></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============ ETAPA 6 ============ -->
+        <div class="step" data-step="6">
+          <div class="step-title">📜 Compromisso</div>
+          <div class="step-sub">Marque todas as opções para prosseguir</div>
+
+          <div class="form-section" style="grid-template-columns: 1fr;">
+            <label class="check-item">
+              <input type="checkbox" name="q26_hierarquia" required>
+              <span class="check-text"><strong>26.</strong> Concordo em respeitar a hierarquia da equipe.</span>
+            </label>
+            <label class="check-item">
+              <input type="checkbox" name="q27_regras" required>
+              <span class="check-text"><strong>27.</strong> Comprometo-me a seguir as regras internas.</span>
+            </label>
+            <label class="check-item">
+              <input type="checkbox" name="q28_orientacoes" required>
+              <span class="check-text"><strong>28.</strong> Entendo que as operações devem seguir as orientações da liderança.</span>
+            </label>
+            <label class="check-item">
+              <input type="checkbox" name="q29_sem_problemas" required>
+              <span class="check-text"><strong>29.</strong> Comprometo-me a não utilizar a equipe para causar problemas fora das atividades autorizadas.</span>
+            </label>
+            <label class="check-item">
+              <input type="checkbox" name="q30_ciente" required>
+              <span class="check-text"><strong>30.</strong> Estou ciente de que minha candidatura será analisada pela administração.</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- ============ ETAPA 7 ============ -->
+        <div class="step" data-step="7">
+          <div class="final-chance">
+            <span class="flame">🔥</span>
+            <div class="final-title">Última Chance</div>
+          </div>
+          <div class="step-sub">Esta é a sua oportunidade de se destacar</div>
+
+          <div class="form-section" style="grid-template-columns: 1fr;">
+            <div class="input-group full">
+              <label>31. Deixe uma mensagem para a liderança explicando por que você merece uma oportunidade na Tropa dos Insônias. <span class="req-star">*</span></label>
+              <textarea name="q31_mensagem_final" placeholder="Escreva sua mensagem final com o coração..." required style="min-height: 200px;"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- NAVEGAÇÃO -->
+        <div class="nav-buttons">
+          <button type="button" class="nav-btn back hidden" id="btnBack">← Voltar</button>
+          <button type="button" class="nav-btn next" id="btnNext" style="grid-column: span 2;">Continuar →</button>
+          <button type="submit" class="nav-btn submit hidden" id="btnSubmit" style="grid-column: span 2;">🌙 Enviar Recrutamento</button>
+        </div>
+
       </form>
 
       <div class="footer-note">
@@ -462,17 +891,133 @@
   </div>
 
   <script>
-    // ⚠️ ATENÇÃO: Esta URL está exposta no código do site.
-    // Qualquer pessoa que abrir o site pode ver e usar.
-    // Delete este webhook depois de testar!
-    const WEBHOOK_URL = "https://discord.com/api/webhooks/1555346497413972118/f8rOukGbc4JIVez6L56PnBcTwcRs7ZmRqsAFi-gEUeBloUX1sQ1nGMOTqluM4rx3Q8Jf";
+    // ============================================================
+    // ⚠️ COLE AQUI A URL DO SEU WEBHOOK DO DISCORD
+    // ============================================================
+    const WEBHOOK_URL = "COLE_AQUI_SEU_WEBHOOK_URL";
+    // ============================================================
 
     const form = document.getElementById('recruitForm');
-    const btn = document.getElementById('submitBtn');
+    const btnBack = document.getElementById('btnBack');
+    const btnNext = document.getElementById('btnNext');
+    const btnSubmit = document.getElementById('btnSubmit');
+    const progressFill = document.getElementById('progressFill');
+    const stepLabel = document.getElementById('stepLabel');
+    const pctLabel = document.getElementById('pctLabel');
     const toast = document.getElementById('toast');
     const toastIcon = document.getElementById('toastIcon');
     const toastMsg = document.getElementById('toastMsg');
+    const stepDots = document.querySelectorAll('.step-dot');
 
+    const TOTAL_STEPS = 7;
+    const STEP_NAMES = ['INFORMAÇÕES', 'EXPERIÊNCIA', 'SITUAÇÕES', 'ATIVIDADE', 'PERFIL', 'COMPROMISSO', 'FINAL'];
+    let currentStep = 1;
+
+    // ---------- Mostrar/Esconder campo "Qual equipe?" ----------
+    const q06 = document.getElementById('q06');
+    const q06Wrap = document.getElementById('q06_extra_wrap');
+    const q06Extra = document.getElementById('q06_extra');
+
+    if (q06) {
+      q06.addEventListener('change', () => {
+        if (q06.value === 'Sim') {
+          q06Wrap.style.display = 'flex';
+          q06Extra.required = true;
+        } else {
+          q06Wrap.style.display = 'none';
+          q06Extra.required = false;
+          q06Extra.value = '';
+        }
+      });
+    }
+
+    // ---------- Atualizar UI ----------
+    function updateUI() {
+      // Steps
+      document.querySelectorAll('.step').forEach(step => {
+        step.classList.toggle('active', Number(step.dataset.step) === currentStep);
+      });
+
+      // Progresso
+      const pct = Math.round((currentStep / TOTAL_STEPS) * 100);
+      progressFill.style.width = pct + '%';
+      pctLabel.textContent = pct + '%';
+      stepLabel.textContent = `ETAPA ${currentStep} DE ${TOTAL_STEPS} — ${STEP_NAMES[currentStep - 1]}`;
+
+      // Dots
+      stepDots.forEach((dot, i) => {
+        const num = i + 1;
+        dot.classList.toggle('active', num === currentStep);
+        dot.classList.toggle('done', num < currentStep);
+      });
+
+      // Botões
+      if (currentStep === 1) {
+        btnBack.classList.add('hidden');
+        btnNext.classList.remove('hidden');
+        btnNext.style.gridColumn = 'span 2';
+        btnSubmit.classList.add('hidden');
+      } else if (currentStep === TOTAL_STEPS) {
+        btnBack.classList.remove('hidden');
+        btnNext.classList.add('hidden');
+        btnSubmit.classList.remove('hidden');
+        btnSubmit.style.gridColumn = 'span 2';
+      } else {
+        btnBack.classList.remove('hidden');
+        btnNext.classList.remove('hidden');
+        btnNext.style.gridColumn = '';
+        btnSubmit.classList.add('hidden');
+      }
+
+      // Scroll suave pro topo do card
+      document.querySelector('.glass-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    // ---------- Validar etapa atual ----------
+    function validateStep(step) {
+      const stepEl = document.querySelector(`.step[data-step="${step}"]`);
+      const fields = stepEl.querySelectorAll('input, select, textarea');
+      let valid = true;
+      let firstInvalid = null;
+
+      fields.forEach(field => {
+        if (field.closest('[style*="display:none"]') || field.closest('.hidden')) return;
+
+        if (!field.checkValidity()) {
+          valid = false;
+          if (!firstInvalid) firstInvalid = field;
+          field.style.borderColor = '#ff5a5a';
+          field.style.boxShadow = '0 0 0 4px rgba(255, 90, 90, 0.2)';
+        } else {
+          field.style.borderColor = '';
+          field.style.boxShadow = '';
+        }
+      });
+
+      if (!valid && firstInvalid) {
+        firstInvalid.focus();
+        showToast('Preencha os campos obrigatórios desta etapa.', true);
+      }
+      return valid;
+    }
+
+    // ---------- Navegação ----------
+    btnNext.addEventListener('click', () => {
+      if (!validateStep(currentStep)) return;
+      if (currentStep < TOTAL_STEPS) {
+        currentStep++;
+        updateUI();
+      }
+    });
+
+    btnBack.addEventListener('click', () => {
+      if (currentStep > 1) {
+        currentStep--;
+        updateUI();
+      }
+    });
+
+    // ---------- Toast ----------
     function showToast(message, isError = false) {
       toastIcon.textContent = isError ? '❌' : '✅';
       toastMsg.textContent = message;
@@ -481,39 +1026,111 @@
       setTimeout(() => toast.classList.remove('show'), 4500);
     }
 
-    form.addEventListener('submit', async (event) => {
-      event.preventDefault();
-
-      const robloxUser = document.getElementById('robloxUser').value.trim();
-      const discordTag = document.getElementById('discordTag').value.trim();
-      const level      = document.getElementById('level').value;
-      const role       = document.getElementById('role').value;
-
-      if (!robloxUser || !discordTag || !level || !role) {
-        showToast('Preencha todos os campos corretamente.', true);
-        return;
+    // ---------- Coletar todas as respostas ----------
+    function collectAnswers() {
+      const fd = new FormData(form);
+      const data = {};
+      for (const [key, value] of fd.entries()) {
+        data[key] = value;
       }
+      return data;
+    }
 
-      btn.disabled = true;
-      btn.textContent = '⏳ ENVIANDO...';
+    // ---------- Envio final ----------
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
 
+      // Valida etapa final
+      if (!validateStep(TOTAL_STEPS)) return;
+
+      const answers = collectAnswers();
+      const d = answers;
+
+      btnSubmit.disabled = true;
+      btnSubmit.textContent = '⏳ ENVIANDO...';
+
+      // Embed organizado por categorias
+      const embed = {
+        title: "🌙 Nova Candidatura — Tropa dos Insônias",
+        color: 0x9f6aff,
+        timestamp: new Date().toISOString(),
+        footer: { text: "Tropa dos Insônias • Recrutamento Oficial" },
+        fields: [
+          {
+            name: "🌙 INFORMAÇÕES BÁSICAS",
+            value:
+              `**01.** \`${d.q01_roblox_nick || '-'}\`\n` +
+              `**02. ID:** \`${d.q02_roblox_id || '-'}\`\n` +
+              `**03. Discord:** \`${d.q03_discord_user || '-'}\`\n` +
+              `**04. Idade:** \`${d.q04_idade || '-'}\`\n` +
+              `**05. Tempo em bailes:** ${d.q05_tempo_bailes || '-'}`,
+            inline: false
+          },
+          {
+            name: "⚔️ EXPERIÊNCIA",
+            value:
+              `**06. Equipe de invasão:** ${d.q06_equipe_invasao || '-'}\n` +
+              `**06.1. Qual equipe:** ${d.q06_qual_equipe || '—'}\n` +
+              `**07. Invasões anteriores:** ${d.q07_invasoes_anteriores || '-'}\n` +
+              `**08. Segue ordens:** ${d.q08_seguir_ordens || '-'}\n` +
+              `**09. Invasão fora do plano:** ${d.q09_invasao_errada || '-'}\n` +
+              `**10. Trabalho em equipe:** ${d.q10_trabalho_equipe || '-'}`,
+            inline: false
+          },
+          {
+            name: "🎯 SITUAÇÕES",
+            value:
+              `**11. Recuar:** ${d.q11_recuar || '-'}\n` +
+              `**12. Discussão:** ${d.q12_discussao || '-'}\n` +
+              `**13. Desorganização:** ${d.q13_desorganizacao || '-'}\n` +
+              `**14. Ordem confusa:** ${d.q14_ordem_confusa || '-'}\n` +
+              `**15. Evitar confusão:** ${d.q15_evitar_confusao || '-'}`,
+            inline: false
+          },
+          {
+            name: "🕐 ATIVIDADE",
+            value:
+              `**16. Horas/dia:** ${d.q16_horas_dia || '-'}\n` +
+              `**17. Horários:** ${d.q17_horarios || '-'}\n` +
+              `**18. Reuniões/treinos:** ${d.q18_reunioes || '-'}\n` +
+              `**19. Microfone:** ${d.q19_microfone || '-'}\n` +
+              `**20. Discord ativo:** ${d.q20_discord_ativo || '-'}`,
+            inline: false
+          },
+          {
+            name: "🧠 PERFIL",
+            value:
+              `**21. Por que entrar:** ${d.q21_porque_entrar || '-'}\n` +
+              `**22. O que acrescentar:** ${d.q22_acrescentar || '-'}\n` +
+              `**23. Pontos fortes:** ${d.q23_pontos_fortes || '-'}\n` +
+              `**24. Críticas:** ${d.q24_criticas || '-'}\n` +
+              `**25. Por que você:** ${d.q25_porque_escolher || '-'}`,
+            inline: false
+          },
+          {
+            name: "📜 COMPROMISSO",
+            value:
+              `**26.** ${d.q26_hierarquia ? '✅' : '❌'} Respeitar hierarquia\n` +
+              `**27.** ${d.q27_regras ? '✅' : '❌'} Seguir regras internas\n` +
+              `**28.** ${d.q28_orientacoes ? '✅' : '❌'} Seguir orientações da liderança\n` +
+              `**29.** ${d.q29_sem_problemas ? '✅' : '❌'} Não causar problemas externos\n` +
+              `**30.** ${d.q30_ciente ? '✅' : '❌'} Ciente da análise da administração`,
+            inline: false
+          },
+          {
+            name: "🔥 MENSAGEM FINAL",
+            value: d.q31_mensagem_final || '-',
+            inline: false
+          }
+        ]
+      };
+
+      // Discord limita embed a 6000 caracteres no total e 1024 por field
+      // Vamos dividir automaticamente se necessário
       const payload = {
         username: "Tropa dos Insônias",
         avatar_url: "https://i.imgur.com/QHcXXQA.jpeg",
-        embeds: [
-          {
-            title: "🌙 Nova Candidatura Recebida",
-            color: 0x9f6aff,
-            fields: [
-              { name: "🎮 Roblox", value: robloxUser, inline: true },
-              { name: "💬 Discord", value: discordTag, inline: true },
-              { name: "📊 Nível", value: String(level), inline: true },
-              { name: "🎯 Função", value: role, inline: false }
-            ],
-            footer: { text: "Tropa dos Insônias • Recrutamento" },
-            timestamp: new Date().toISOString()
-          }
-        ]
+        embeds: splitEmbed(embed)
       };
 
       try {
@@ -523,22 +1140,58 @@
           body: JSON.stringify(payload)
         });
 
-        if (!res.ok) {
-          throw new Error("Status " + res.status);
-        }
+        if (!res.ok) throw new Error("Status " + res.status);
 
         showToast('Candidatura enviada! Aguarde contato.');
         form.reset();
+        currentStep = 1;
+        q06Wrap.style.display = 'none';
+        updateUI();
       } catch (err) {
         console.error(err);
         showToast('Erro ao enviar. Tente novamente.', true);
       } finally {
-        btn.disabled = false;
-        btn.textContent = '🌙 ENVIAR CANDIDATURA';
+        btnSubmit.disabled = false;
+        btnSubmit.textContent = '🌙 ENVIAR RECRUTAMENTO';
       }
     });
 
-    // Paralaxe suave no fundo (apenas desktop)
+    // ---------- Divide embed se algum field passar de 1024 chars ----------
+    function splitEmbed(embed) {
+      const embeds = [];
+      const MAX = 1024;
+
+      embed.fields.forEach(field => {
+        if (field.value.length <= MAX) {
+          embeds.push({ ...embed, fields: [field] });
+        } else {
+          // Divide em pedaços
+          let remaining = field.value;
+          let part = 1;
+          while (remaining.length > 0) {
+            const chunk = remaining.slice(0, MAX - 20);
+            remaining = remaining.slice(MAX - 20);
+            embeds.push({
+              ...embed,
+              title: part === 1 ? embed.title : `${embed.title} (cont.)`,
+              fields: [{
+                name: part === 1 ? field.name : `${field.name} (cont.)`,
+                value: chunk,
+                inline: false
+              }]
+            });
+            part++;
+          }
+        }
+      });
+
+      return embeds;
+    }
+
+    // ---------- Inicializa ----------
+    updateUI();
+
+    // ---------- Paralaxe suave (desktop) ----------
     if (!window.matchMedia('(pointer: coarse)').matches) {
       window.addEventListener('mousemove', (e) => {
         const bg = document.querySelector('.bg-image');
